@@ -1,0 +1,11 @@
+## General
+.DS_Store
+._*
+*.log
+
+## Local
+.idea
+node_modules
+
+## Built-files
+.cache

@@ -2,8 +2,8 @@
  * 数组求和
  */
 const total1 = [0, 1, 2, 3].reduce((pre, cur) => {
-    console.log(pre,cur)
-    if(pre===1) return 10
+    console.log(pre, cur);
+    if (pre === 1) return 10;
     return pre + cur;
 });
 console.log(total1);
@@ -29,7 +29,7 @@ console.log(array);
  * 计算数组中每个元素出现的次数(一)
  */
 
-const names = ['tom', 'jim', 'jack', 'tom', 'jack'];
+const names = ["tom", "jim", "jack", "tom", "jack"];
 const countNames = names.reduce((allNames, curName) => {
     if (curName in allNames) {
         allNames[curName]++;
@@ -48,12 +48,12 @@ const elementCount = (arr, val) =>
     arr.reduce((count, cur) => {
         return cur === val ? count + 1 : count + 0;
     }, 0);
-console.log(elementCount(['tom', 'jim', 'jack', 'tom', 'jack'], 'tom'));
+console.log(elementCount(["tom", "jim", "jack", "tom", "jack"], "tom"));
 
 /**
  * 数组去重（一）
  */
-const duplicatArr = ['tom', 'jim', 'jack', 'tom', 'jack'];
+const duplicatArr = ["tom", "jim", "jack", "tom", "jack"];
 const result = duplicatArr.sort().reduce((init, cur) => {
     if (init.length < 1 || init[init.length - 1] !== cur) {
         init.push(cur);

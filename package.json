@@ -1,19 +1,26 @@
 {
-  "name": "testing",
-  "version": "1.0.0",
-  "description": "练习测试代码demo",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lebronjs/testing.git"
-  },
-  "author": "xuge",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lebronjs/testing/issues"
-  },
-  "homepage": "https://github.com/lebronjs/testing#readme"
+    "name": "testing",
+    "version": "1.0.0",
+    "description": "练习测试代码demo",
+    "main": "index.js",
+    "scripts": {
+        "server": "nodemon server/expressServer.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lebronjs/testing.git"
+    },
+    "author": "xuge",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/lebronjs/testing/issues"
+    },
+    "homepage": "https://github.com/lebronjs/testing#readme",
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.2"
+    }
 }

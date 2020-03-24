@@ -1,10 +1,10 @@
-/**
+/** 1
  *  import 和 require
  *  import 命令是在编译阶段执行的，在代码运行之前。所以不管import前面是否有console，都会先执行import进来的模块里面的代码
  *  require 是你可以在代码运行时根据需要加装依赖项，类似同步按顺序执行
  */
 
-/**
+/** 2
  * const、let、箭头函数 块级作用域？？？this指向？？？
  * 浏览器端和node端执行结果不一样
  *《javascript高级程序设计》中有说到:
@@ -26,7 +26,7 @@ setTimeout(() => {
     console.log(data.getStatus.call(this));
 }, 0);
 
-/**
+/** 3
  * language是一个setter，只能修改
  * 如果设置set languages(){} 会覆盖languages:[]
  */
@@ -38,7 +38,7 @@ setTimeout(() => {
 // };
 // console.log(config.language);
 
-/**
+/** 4
  * 向构造函数添加属性方法，如要被继承，需使用prototype添加
  * 注意！！！！！prototype 不能用箭头函数
  */
@@ -53,7 +53,7 @@ Person.prototype.getFullName = function() {
 };
 console.log(member.getFullName());
 
-/**
+/** 5
  * 添加迭代器，设置一个可迭代对象
  */
 

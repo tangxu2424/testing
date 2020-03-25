@@ -1,0 +1,89 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>line-height 和 vertical-align</title>
+    </head>
+    <script>
+        /** 1
+         * freeze 只对对象浅冻结
+         */
+        const person = {
+            name: "Kobe",
+            address: {
+                city: "LA"
+            }
+        };
+        Object.freeze(person);
+        person.name = "Bryant";
+        person.address.city = "paradise";
+        console.log(person);
+
+        /** 2
+         * flat
+         */
+        const emojis = ["🍏", ["🍎", "🍎", "🍎"], [("🍐", "🍊", "🍋", "🍌", ["🍉", "🍇", "🍓", "🍈", "🍒", "🍑"])]];
+        console.log(emojis.flat(), emojis.flat(1), emojis.flat(2));
+    </script>
+    <style>
+        body > div {
+            margin-bottom: 50px;
+        }
+        .test {
+            background: red;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+        }
+        span {
+            background: white;
+        }
+
+        .demo1 {
+            font-size: 20px;
+            line-height: 0;
+            border: 1px solid blue;
+            background: red;
+        }
+        .demo2 {
+            font-size: 0;
+            line-height: 20px;
+            border: 1px solid red;
+            background: yellow;
+        }
+    </style>
+    <body>
+        <div>
+            <h3>1、为什么会有空白部分？？？</h3>
+            <div class="test">
+                <img src="https://damonare.cn/logo.png" alt="" />
+                <span>Xx</span>
+            </div>
+        </div>
+
+        <div>
+            <h3>
+                2、CSS中起高度作用的只有height或者line-height。
+            </h3>
+            <h3>inline元素的高度决定者是line-height，并不是文字内容撑开的。✌️</h3>
+            <div class="demo1">测试111</div>
+            <div class="demo2">测试222</div>
+        </div>
+        <div>
+            <h3>3、demo1将创建两个匿名块盒，</h3>
+            <h3>demo2将生成一个行内格式上下文，生成一个匿名行盒(line box)，里面包含两个匿名行内盒(inline box)，</h3>
+            <div>
+                Some inline text
+                <p>followed by a paragraph</p>
+                followed by more inline text.
+            </div>
+            <p>
+                Some inline text
+                <span>followed by a paragraph</span>
+                followed by more inline text.
+            </p>
+        </div>
+    </body>
+</html>

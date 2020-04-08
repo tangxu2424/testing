@@ -42,6 +42,18 @@ console.log(a[b]); // 456
 
 /** 4
  * Object.seal() 密封一个对象，使其属性不可添加、不可删除、不可配置。 （现有属性可以读取可以修改）
- * Object.freeze() 冻结一个对象，什么都不能做。 （现有属性只能读取）
+ * Object.freeze() 冻结(浅冻结)一个对象，什么都不能做。 （现有属性只能读取）(如果属性是另一个object则可以做任何操作没有被冻结)
  * 都不能进行 Object.assign()
  */
+
+const person = {
+    name: "Lebron",
+    address: {
+        street: "100 LA",
+    },
+};
+
+Object.freeze(person);
+
+console.log(delete person.name, delete person.adress);
+console.log((person.address.street = "aaa"), person);

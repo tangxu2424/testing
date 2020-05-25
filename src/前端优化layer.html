@@ -1,6 +1,6 @@
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="initial-scale=1" />
     </head>
     <style>
         article {
@@ -54,12 +54,64 @@
             width: 400px;
         }
     </style>
+
+    <style>
+        .multiline-ellipsis-0 {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            overflow: hidden;
+        }
+        .multiline-ellipsis,
+        .multiline-ellipsis-2 {
+            overflow: hidden;
+            text-align: justify;
+            position: relative;
+        }
+        .multiline-ellipsis::after {
+            content: "";
+            position: absolute;
+            height: 1.2em;
+            width: 30%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), #ffffe0 80%);
+            right: 0;
+            bottom: 0;
+        }
+
+        .multiline-ellipsis-2::before {
+            content: "...";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+
+        .multiline-ellipsis-2::after {
+            content: "";
+            background-color: #ffffe0;
+            width: 1em;
+            height: 2em;
+            position: absolute;
+            display: inline;
+            right: 0;
+        }
+    </style>
     <body>
         <article>
             <section>
                 <h4>标题1111111111</h4>
                 <content>
-                    <p>12月2日，有网友爆料称...</p>
+                    <p class="multiline-ellipsis-0">
+                        “针尖大的窟窿能漏过斗大的风。”总书记用这句俗语，意在提醒大家，不能放松警惕、麻痹大意，要时刻绷紧疫情防控这根弦。
+                        　　正如总书记强调的：“慎终如始、再接再厉，持续抓好外防输入、内防反弹工作，决不能让来之不易的疫情防控成果前功尽弃。”
+                    </p>
+                    <p class="multiline-ellipsis">
+                        “针尖大的窟窿能漏过斗大的风。”总书记用这句俗语，意在提醒大家，不能放松警惕、麻痹大意，要时刻绷紧疫情防控这根弦。
+                        　　正如总书记强调的：“慎终如始、再接再厉，持续抓好外防输入、内防反弹工作，决不能让来之不易的疫情防控成果前功尽弃。”
+                    </p>
+                    <p class="multiline-ellipsis-2">
+                        “针尖大的窟窿能漏过斗大的风。”总书记用这句俗语，意在提醒大家，不能放松警惕、麻痹大意，要时刻绷紧疫情防控这根弦。
+                        　　正如总书记强调的：“慎终如始、再接再厉，持续抓好外防输入、内防反弹工作，决不能让来之不易的疫情防控成果前功尽弃。”
+                    </p>
                 </content>
                 <footer>网友评论：...</footer>
             </section>
@@ -76,7 +128,7 @@
                 <content>
                     <input type="file" name="test" id="sizeTest" onchange="selectFile(this.files)" />
                     <button id="replyBtn">click1</button>
-                    <button onclick="clickHandle(event)">click2</button>
+                    <button onclick="clickHandle()">click2</button>
                 </content>
                 <footer>网友评论：...</footer>
             </section>

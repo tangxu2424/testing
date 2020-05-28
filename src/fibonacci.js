@@ -1,3 +1,50 @@
+function fibonacci_origin(num) {
+    if (num <= 2) {
+        return 1;
+    } else {
+        return fibonacci_origin(num - 1) + fibonacci_origin(num - 2);
+    }
+}
+
+console.log(fibonacci_origin(3), "\n");
+
+/**
+ * 斐波那契数列尾递归
+ */
+function fibonacci_tail(n, num1 = 1, num2 = 1) {
+    if (n <= 0) {
+        return 0;
+    } else if (n === 1) {
+        return num1;
+    }
+    return fibonacci_tail(n - 1, num2, num1 + num2);
+}
+console.log(fibonacci_tail(100), "\n");
+
+/**
+ * Proxy 缓存代理
+ * 不太行啊，还是尾递归厉害
+ */
+
+function cacheProxy(fn, cache = new Map()) {
+    return new Proxy(fn, {
+        apply: function (target, context, args) {
+            let name = args.join("");
+            if (cache.has(name)) {
+                return cache.get(name);
+            } else {
+                const result = Reflect.apply(target, undefined, args);
+                cache.set(name, result);
+                return result;
+            }
+        },
+    });
+}
+
+const getFibProxy = cacheProxy(fibonacci_origin);
+//console.log(getFibProxy(40));
+//console.log(getFibProxy(100), "\n");
+
 /** for...of循环可以自动遍历 Generator 函数运行时生成的Iterator对象，
  * 且此时不再需要调用next方法。
  */

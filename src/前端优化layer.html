@@ -128,7 +128,7 @@
                 <content>
                     <input type="file" name="test" id="sizeTest" onchange="selectFile(this.files)" />
                     <button id="replyBtn">click1</button>
-                    <button onclick="clickHandle()">click2</button>
+                    <button onclick="clickHandle(event,true)">click2</button>
                 </content>
                 <footer>网友评论：...</footer>
             </section>
@@ -150,8 +150,8 @@
 
                 console.log(123);
             });
-            function clickHandle(event) {
-                console.log(123, event);
+            function clickHandle(event, isInit) {
+                console.log(123, event, isInit);
             }
             function imageSizeVerify(file) {
                 return new Promise(function (resolve, reject) {

@@ -1,0 +1,91 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>microtask</title>
+    </head>
+    <body>
+        <style>
+            @keyframes left-move {
+                from {
+                    left: 0px;
+                    transform: scale(1);
+                }
+                to {
+                    left: 100px;
+                    transform: scale(0.5);
+                }
+            }
+            @keyframes translate-move {
+                from {
+                    transform: translateX(0);
+                }
+                to {
+                    transform: translateX(100px);
+                }
+            }
+            #outer {
+                padding: 20px;
+                padding-left: 0;
+                background: #616161;
+            }
+
+            #inner {
+                width: 100px;
+                height: 100px;
+                background: wheat;
+                position: relative;
+                transform: scale(0.5);
+                animation: left-move 5s infinite;
+            }
+            #inner2 {
+                width: 100px;
+                height: 100px;
+                background: lightpink;
+                position: relative;
+                left: 100px;
+                transform: scale(1);
+            }
+        </style>
+        <div id="outer">
+            <div id="inner"></div>
+            <div id="inner2"></div>
+        </div>
+    </body>
+    <script>
+        const $inner = document.querySelector("#inner");
+        const $outer = document.querySelector("#outer");
+
+        async function asyncFun() {
+            console.log("async");
+        }
+        async function handler() {
+            let num = await new Promise(function (rs, rj) {
+                setTimeout(() => rs(333), 1000);
+            });
+            console.log(num, "click"); // 直接输出
+            new Promise(function (resolve, reject) {
+                console.log("in p1");
+                resolve();
+                Promise.resolve().then(() => console.log("promise3"));
+                console.log("in p2");
+                $outer.setAttribute("data-random", Math.random()); // DOM属性修改，触发微任务
+            }).then((_) => {
+                console.log("promise1");
+            }); // 注册微任务
+            Promise.resolve().then(() => console.log("promise2"));
+            setTimeout((_) => console.log("timeout")); // 注册宏任务
+
+            requestAnimationFrame((_) => console.log("animationFrame")); // 注册宏任务
+        }
+
+        new MutationObserver((_) => {
+            console.log("observer");
+        }).observe($outer, {
+            attributes: true,
+        });
+
+        $inner.addEventListener("click", handler);
+        $outer.addEventListener("click", handler);
+    </script>
+</html>

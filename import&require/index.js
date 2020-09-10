@@ -12,8 +12,12 @@
 console.log("======b======");
 const b = require("./b");
 console.log("b:", b);
-b.score = 24;
-console.log("b:", b);
 
+setTimeout(() => {
+  console.log("b:", b);
+}, 1000);
+
+//b.score = 24;
+// 缓存 24
 const bb = require("./b");
 console.log("bb:", bb);

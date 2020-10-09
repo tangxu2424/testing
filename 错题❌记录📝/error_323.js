@@ -15,15 +15,15 @@
  */
 var status = "global status";
 setTimeout(() => {
-    const status = "timeout status";
-    const data = {
-        status: "object status",
-        getStatus() {
-            return this.status;
-        }
-    };
-    console.log(data.getStatus());
-    console.log(data.getStatus.call(this));
+  const status = "timeout status";
+  const data = {
+    status: "object status",
+    getStatus() {
+      return this.status;
+    },
+  };
+  console.log(data.getStatus());
+  console.log(data.getStatus.call(this));
 }, 0);
 
 /** 3
@@ -43,13 +43,13 @@ setTimeout(() => {
  * 注意！！！！！prototype 不能用箭头函数
  */
 function Person(firstName, lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+  this.firstName = firstName;
+  this.lastName = lastName;
 }
 const member = new Person("Allen", "Nic");
 //Person.getFullName = () => this.firstName + this.lastName;
-Person.prototype.getFullName = function() {
-    return this.firstName + this.lastName;
+Person.prototype.getFullName = function () {
+  return this.firstName + this.lastName;
 };
 console.log(member.getFullName());
 
@@ -58,12 +58,38 @@ console.log(member.getFullName());
  */
 
 const player = {
-    name: "lebron",
-    age: 35,
-    *[Symbol.iterator]() {
-        yield* Object.values(this);
-    }
+  name: "lebron",
+  age: 35,
+  *[Symbol.iterator]() {
+    yield* Object.values(this);
+  },
 };
 console.log([...player]); // TypeError: player is not iterable
 
 /********** 3/23 end **********/
+
+/**
+ * 迭代器原理
+ *  https://www.jb51.net/article/156041.htm
+ */
+
+function createIterator(iterms) {
+  let i = 0;
+  return {
+    next() {
+      let done = i >= iterms.length;
+      let value = !done ? iterms[i++] : undefined;
+      return {
+        done,
+        value,
+      };
+    },
+  };
+}
+
+let arrayIterator = createIterator([1, 2, 3]);
+
+console.log(arrayIterator.next()); // { done: false, value: 1 }
+console.log(arrayIterator.next()); // { done: false, value: 2 }
+console.log(arrayIterator.next()); // { done: false, value: 3 }
+console.log(arrayIterator.next()); // { done: true, value: undefined }

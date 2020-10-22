@@ -1,0 +1,87 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js 压缩图片</title>
+    <style>
+      .parent {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-rows: 100%;
+        grid-template-columns: 300px auto 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="left" style="background-color: green"></div>
+      <div class="main">
+        <div>
+          <input
+            type="file"
+            name="fileReaderTest"
+            id="fileReaderTest"
+            accept="image/gif, image/jpeg"
+            onchange="fileChange(this.files)"
+          />
+        </div>
+      </div>
+      <div class="right" style="background-color: green"></div>
+    </div>
+    <script>
+      console.log(123);
+
+      /**
+        通过图片链接（url）获取图片 Image 对象
+      **/
+      const url2Image = function (url, callback) {
+        var image = new Image();
+        image.src = url;
+        image.onload = function () {
+          callback(image);
+        };
+      };
+
+      /**
+        FileReader 对象允许 Web 应用程序异步读取存储在计算机上的文件（或原始数据缓冲区）的内容
+      **/
+      const file2DataUrl = function (file, callback) {
+        let reader = new FileReader();
+        let image = new Image();
+        reader.readAsDataURL(file);
+
+        reader.onload = function () {
+          image.src = reader.result;
+          callback(image);
+        };
+      };
+
+      /**
+        URL 对象
+      **/
+      const file2Image = function (file, callback) {
+        let image = new Image();
+        let URL = window.webkitURL || window.URL;
+        if (URL) {
+          let url = URL.createObjectURL(file);
+          image.src = url;
+          image.onload = function () {
+            callback(image);
+            URL.revokeObjectURL(url);
+          };
+        } else {
+          file2DataUrl(file, callback);
+        }
+      };
+
+      function fileChange(file) {
+        file2Image(file[0], function (image) {
+          image.width = 360;
+          image.height = 240;
+          document.querySelector(".main").append(image);
+        });
+      }
+    </script>
+  </body>
+</html>
